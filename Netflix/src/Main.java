@@ -37,7 +37,7 @@ public class Main {
                 opcion = Integer.parseInt(entradaUsuario);
 
                 switch (opcion) {
-                    case 1:
+                    case 1: //comedia
                         List<Pelicula> peliculasComedia = new ArrayList<>();
 
                         for (Pelicula peli : catalogo) {
@@ -83,57 +83,92 @@ public class Main {
 
                         break;
 
-                    case 2:
-                        //Arreglo para almacenar las peliculas de comedia
+                    case 2: //accion
                         List<Pelicula> peliculasAccion = new ArrayList<>();
-
-                        //For para agregar las peliculas de comedia
                         for (Pelicula peli : catalogo) {
                             if (peli instanceof PeliculaAccion) {
                                 peliculasAccion.add(peli);
                             }
                         }
 
-
-                        //Mostrar las peliculas que hayan en la lista con formato de menu
                         int j = 1;
-                        submenu = "";
+                        String submenu2 = "";
+                        System.out.println("───────────★ ˙ ̟ ACCIÓN  ˙ ̟───────────");
                         for (Pelicula peli : peliculasAccion) {
-                            submenu = submenu + j + " . " + peli.getTitulo() + "\n";
+                            submenu2 = submenu2 + j + ". " + peli.getTitulo() + "\n";
                             j += 1;
                         }
-                        submenu = submenu + j + " . Salir\n";
+                        submenu2 = submenu2 + j + ". Salir";
 
-
-                        //Ciclo para mostrar la info de la pelicula solicitada
-                        flag = false;
+                        boolean flag2 = false;
 
                         do {
-                            System.out.println(submenu);
-                            System.out.print("Elija una opción: ");
+                            System.out.println(submenu2);
+                            System.out.println("★──────────────────────────────────────★\nElija una opción: ");
                             String opcionEscogida = scanner.nextLine();
 
-                            String limite = String.valueOf(peliculasAccion.size() + 1);
+                            String limite2 = String.valueOf(peliculasAccion.size() + 1);
 
-                            if (opcionEscogida.equals(limite)) {
-                                System.out.print("Regresando a menú principal ...");
-                                flag = true;
-
+                            if (opcionEscogida.equals(limite2)) {
+                                System.out.print("Regresando a menú principal ...\n");
+                                flag2 = true;
+                                break;
                             }
 
                             try {
                                 int numOpcion = Integer.parseInt(opcionEscogida);
                                 PeliculaAccion Pelicula = (PeliculaAccion) peliculasAccion.get(numOpcion - 1);
                                 System.out.println(Pelicula.toString());
-                                flag = true;
+                                flag2 = true;
                             } catch (Exception e) {
-                                System.out.println("La opción escogida no es válida");
+                                System.out.println("\nLa opción escogida no es válida. Intentelo de nuevo:");
                             }
-                        }while(!flag);
+                        } while (!flag2);
+
                         break;
-                    case 3:
-                        //terror
-                        System.out.println("Opción 3 seleccionada: TERROR.\n");
+
+                    case 3: //TERROR
+                        List<Pelicula> peliculasTerror = new ArrayList<>();
+                        for (Pelicula peli : catalogo) {
+                            if (peli instanceof PeliculaTerror) {
+                                peliculasTerror.add(peli);
+                            }
+                        }
+
+                        int k = 1;
+                        String submenu3 = "";
+                        System.out.println("───────────★ ˙ ̟ TERROR  ˙ ̟───────────");
+                        for (Pelicula peli : peliculasTerror) {
+                            submenu3 = submenu3 + k + ". " + peli.getTitulo() + "\n";
+                            k += 1;
+                        }
+                        submenu3 = submenu3 + k + ". Salir";
+
+                        boolean flag3 = false;
+
+                        do {
+                            System.out.println(submenu3);
+                            System.out.println("★──────────────────────────────────────★\nElija una opción: ");
+                            String opcionEscogida = scanner.nextLine();
+
+                            String limite3 = String.valueOf(peliculasTerror.size() + 1);
+
+                            if (opcionEscogida.equals(limite3)) {
+                                System.out.print("Regresando a menú principal ...\n");
+                                flag3 = true;
+                                break;
+                            }
+
+                            try {
+                                int numOpcion = Integer.parseInt(opcionEscogida);
+                                PeliculaTerror Pelicula = (PeliculaTerror) peliculasTerror.get(numOpcion - 1);
+                                System.out.println(Pelicula.toString());
+                                flag3 = true;
+                            } catch (Exception e) {
+                                System.out.println("\nLa opción escogida no es válida. Intentelo de nuevo:");
+                            }
+                        } while (!flag3);
+
                         break;
 
                     case 4:
@@ -222,7 +257,7 @@ public class Main {
                         System.out.println("Saliendo...\n");
                         break;
                     default:
-                        System.out.println("Opción no válida. Por favor, elige una opción entre 1 y 4.");
+                        System.out.println("\nLa opción escogida no es válida. Intentelo de nuevo:");
                         break;
                 }
             } catch (Exception e) {
