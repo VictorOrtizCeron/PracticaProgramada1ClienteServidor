@@ -80,14 +80,61 @@ public class Main {
                             } catch (Exception e) {
                                 System.out.println("La opción escogida no es válida");
                             }
-                        }while(!flag);
+                        } while (!flag);
 
 
                         break;
                     case 2:
-                        //accion
-                        System.out.println("Opción 2 seleccionada: ACCION.\n");
+
+                        //Arreglo para almacenar las peliculas de comedia
+                        List<Pelicula> peliculasAccion = new ArrayList<>();
+
+                        //For para agregar las peliculas de comedia
+                        for (Pelicula peli : catalogo) {
+                            if (peli instanceof PeliculaAccion) {
+                                peliculasAccion.add(peli);
+                            }
+                        }
+
+
+                        //Mostrar las peliculas que hayan en la lista con formato de menu
+                        int j = 1;
+                        submenu = "";
+                        for (Pelicula peli : peliculasAccion) {
+                            submenu = submenu + j + " . " + peli.getTitulo() + "\n";
+                            j += 1;
+                        }
+                        submenu = submenu + j + " . Salir\n";
+
+
+                        //Ciclo para mostrar la info de la pelicula solicitada
+                        flag = false;
+
+                        do {
+                            System.out.println(submenu);
+                            System.out.print("Elija una opción: ");
+                            String opcionEscogida = scanner.nextLine();
+
+                            String limite = String.valueOf(peliculasAccion.size() + 1);
+
+                            if (opcionEscogida.equals(limite)) {
+                                System.out.print("Regresando a menú principal ...");
+                                flag = true;
+
+                            }
+
+                            try {
+                                int numOpcion = Integer.parseInt(opcionEscogida);
+                                PeliculaAccion Pelicula = (PeliculaAccion) peliculasAccion.get(numOpcion - 1);
+                                System.out.println(Pelicula.toString());
+                                flag = true;
+                            } catch (Exception e) {
+                                System.out.println("La opción escogida no es válida");
+                            }
+                        }while(!flag);
+
                         break;
+
                     case 3:
                         //terror
                         System.out.println("Opción 3 seleccionada: TERROR.\n");
