@@ -20,13 +20,15 @@ public class Main {
         // Menú principal
         while (repetirMenu) {
             try {
-                String menuPrincipal = "\n===========Bienvenid@ a Netflix===========\n" +
+
+                String menuPrincipal = "\n───────────★ ˙ ̟ Bienvenid@ a Netflix ★ ˙ ̟───────────\n" +
                         "1. Ver catalogo de comedias.\n" +
                         "2. Ver catalogo de accion.\n" +
                         "3. Ver catalogo de terror.\n" +
                         "4. Ver catalogo de drama.\n" +
                         "5. Ver todo el catálogo.\n" +
-                        "6. Salir.\n";
+                        "6. Salir.\n" +
+                        "★───────────────────────────────────────────────────★";
 
                 System.out.println(menuPrincipal);
                 System.out.print("Elija una opción: ");
@@ -36,8 +38,6 @@ public class Main {
 
                 switch (opcion) {
                     case 1:
-
-
                         List<Pelicula> peliculasComedia = new ArrayList<>();
 
                         for (Pelicula peli : catalogo) {
@@ -46,30 +46,29 @@ public class Main {
                             }
                         }
 
-
                         int i = 1;
                         String submenu = "";
+                        System.out.println("───────────★ ˙ ̟ COMEDIA  ˙ ̟───────────");
                         for (Pelicula peli : peliculasComedia) {
-                            submenu = submenu + i + " . " + peli.getTitulo() + "\n";
+                            submenu = submenu + i + ". " + peli.getTitulo() + "\n";
                             i += 1;
                         }
-                        submenu = submenu + i + " . Salir\n";
-
+                        submenu = submenu + i + ". Salir";
 
                         boolean flag = false;
 
                         do {
                             System.out.println(submenu);
-                            System.out.print("Elija una opción: ");
+                            System.out.println("★──────────────────────────────────────★\nElija una opción: ");
                             String opcionEscogida = scanner.nextLine();
 
                             String limite = String.valueOf(peliculasComedia.size() + 1);
 
                             //condición de salida del menú
                             if (opcionEscogida.equals(limite)) {
-                                System.out.print("Regresando a menú principal ...");
+                                System.out.print("Regresando a menú principal ...\n");
                                 flag = true;
-
+                                break;
                             }
 
                             try {
@@ -78,89 +77,88 @@ public class Main {
                                 System.out.println(Pelicula.toString());
                                 flag = true;
                             } catch (Exception e) {
-                                System.out.println("La opción escogida no es válida");
+                                System.out.println("\nLa opción escogida no es válida.Intentelo de nuevo:");
                             }
-                        }while(!flag);
-
+                        } while (!flag);
 
                         break;
+
                     case 2:
                         //accion
                         System.out.println("Opción 2 seleccionada: ACCION.\n");
                         break;
                     case 3:
-                                                System.out.println("Opción 3 seleccionada: TERROR.\n");
+                        //terror
+                        System.out.println("Opción 3 seleccionada: TERROR.\n");
+                        break;
 
-
-                        List<Pelicula> peliculasTerror = new ArrayList<>();
-
+                    case 4:
+                        // Drama
+                        List<Pelicula> peliculasDrama = new ArrayList<>();
                         for (Pelicula peli : catalogo) {
-                            if (peli instanceof PeliculaTerror) {
-                                peliculasTerror.add(peli);
+                            if (peli instanceof PeliculaDrama) {
+                                peliculasDrama.add(peli);
                             }
                         }
-                        int aux = 1;
-                        String submenuTerror = "";
-                        for (Pelicula peli : peliculasTerror) {
-                            submenuTerror = submenuTerror + aux + " . " + peli.getTitulo() + "\n";
-                            aux += 1;
+
+                        int x = 1;
+                        String submenu4 = "";
+                        System.out.println("───────────★ ˙ ̟ DRAMA  ˙ ̟ ★───────────");
+
+                        for (Pelicula peli : peliculasDrama) {
+                            submenu4 = submenu4 + x + ". " + peli.getTitulo() + ".\n";
+                            x += 1;
                         }
-                        submenuTerror = submenuTerror + aux + " . Salir\n";
+                        submenu4 = submenu4 + x + ". Salir.";
+                        boolean bandera = false;
+                        do {
+                            System.out.println(submenu4);
+                            System.out.println("★──────────────────────────────────────★\nElija una opción: ");
+                            String opcionCase4 = scanner.nextLine();
+                            String limiteCase4 = String.valueOf(peliculasDrama.size() + 1);
 
-
-                        boolean flag3 = false;
-
-                        do{
-                            System.out.println(submenuTerror);
-                            System.out.print("Elija una opción: ");
-                            String opcionEscogida = scanner.nextLine();
-
-                            String limite = String.valueOf(peliculasTerror.size() + 1);
-
-                            //condición de salida del menú
-                            if (opcionEscogida.equals(limite)) {
-                                System.out.print("Regresando a menú principal ...");
-                                flag3 = true;
-
+                            if (opcionCase4.equals(limiteCase4)) {
+                                System.out.print("Regresando a menú principal ...\n");
+                                bandera = true;
+                                break;
                             }
 
                             try {
-                                int numOpcion = Integer.parseInt(opcionEscogida);
-                                PeliculaTerror Pelicula = (PeliculaTerror) peliculasTerror.get(numOpcion - 1);
-                                System.out.println(Pelicula.toString());
-                                flag3 = true;
+                                int numOpcionCase4 = Integer.parseInt(opcionCase4);
+                                PeliculaDrama pelicula = (PeliculaDrama) peliculasDrama.get(numOpcionCase4 - 1);
+                                System.out.println(pelicula.toString());
+                                bandera = true;
                             } catch (Exception e) {
-                                System.out.println("La opción escogida no es válida");
+                                System.out.println("\nLa opción escogida no es válida.Intentelo de nuevo:");
                             }
-                        }while(!flag3);
-                        break;
-                    case 4:
-                        // drama
-                        System.out.println("Opción 4 seleccionada: DRAMA.\n");
+                        } while (!bandera);
+
                         break;
 
                     case 5:
                         int iTodos = 1;
                         String submenuTODOS = "";
+                        System.out.println("───────────★ ˙ ̟ CATALOGO COMPLETO  ˙ ̟ ★───────────");
+
                         for (Pelicula peli : catalogo) {
-                            submenuTODOS = submenuTODOS + iTodos + " . " + peli.getTitulo() + "\n";
+                            submenuTODOS = submenuTODOS + iTodos + ". " + peli.getTitulo() + "\n";
                             iTodos += 1;
                         }
-                        submenuTODOS = submenuTODOS + iTodos + " . Salir\n";
+                        submenuTODOS = submenuTODOS + iTodos + ". Salir";
 
 
                         boolean flagTODOS = false;
 
                         do {
                             System.out.println(submenuTODOS);
-                            System.out.print("Elija una opción: ");
+                            System.out.println("★──────────────────────────────────────★\nElija una opción: ");
                             String opcionEscogida = scanner.nextLine();
 
                             String limite = String.valueOf(catalogo.size() + 1);
 
                             //condición de salida del menú
                             if (opcionEscogida.equals(limite)) {
-                                System.out.print("Regresando a menú principal ...");
+                                System.out.print("Regresando a menú principal ...\n");
                                 flagTODOS = true;
 
                             }
@@ -171,7 +169,7 @@ public class Main {
                                 System.out.println(peli.toString());
                                 flagTODOS = true;
                             } catch (Exception e) {
-                                System.out.println("La opción escogida no es válida");
+                                System.out.println("\nLa opción escogida no es válida.Intentelo de nuevo:");
                             }
                         }while(!flagTODOS);
                         break;
